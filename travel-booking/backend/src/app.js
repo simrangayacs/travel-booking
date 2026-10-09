@@ -8,7 +8,7 @@ const errorHandler = require('./middleware/error');
 const app = express();
 app.set('trust proxy', 1); // behind Render/Vercel proxies
 app.use(helmet());
-app.use(cors({ origin: config.corsOrigin }));
+app.use(cors());
 
 // webhook needs the raw body -> must be registered BEFORE express.json()
 app.post('/api/payments/webhook', express.raw({ type: '*/*', limit: '100kb' }), require('./routes/payments').webhook);
