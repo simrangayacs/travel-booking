@@ -30,7 +30,7 @@ app.get('/api/health', (_req, res) => res.json({ ok: true, paymentMode: config.p
 // Temporary seed route to populate cloud database
 app.get('/api/seed-db', async (req, res) => {
   try {
-    const seed = require('../seed');
+    const seed=require('./seed');
     if (typeof seed === 'function') {
       await seed();
     }
