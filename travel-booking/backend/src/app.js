@@ -43,3 +43,12 @@ app.get('/api/seed-db', async (req, res) => {
 app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
 app.use(errorHandler);
 module.exports = app;
+app.get('/api/seed-db', async (req, res) => {
+  try {
+    const seedDatabase = require('./seed');
+    await seedDatabase();
+    res.json({ success: true, message: "Database seeded successfully!" });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
