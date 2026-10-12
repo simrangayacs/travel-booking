@@ -26,6 +26,20 @@ app.use('/api/reviews', require('./routes/reviews'));
 app.use('/api/itinerary', require('./routes/itinerary'));
 app.use('/api/admin', require('./routes/admin'));
 app.get('/api/health', (_req, res) => res.json({ ok: true, paymentMode: config.paymentMode }));
+
+// Temporary seed route to populate cloud database
+app.get('/api/seed-db', async (req, res) => {
+  try {
+    const seed = require('../seed');
+    if (typeof seed === 'function') {
+      await seed();
+    }
+    res.status(200).json({ success: true, message: "Database seeded successfully!" });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
 app.use(errorHandler);
 module.exports = app;
