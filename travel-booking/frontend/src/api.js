@@ -1,4 +1,4 @@
-const BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000') + '/api';
+ const BASE = (import.meta.env.VITE_API_URL || 'https://travel-booking-rw9e.onrender.com') + '/api';
 export const getToken = () => localStorage.getItem('tb_token');
 export const setToken = t => (t ? localStorage.setItem('tb_token', t) : localStorage.removeItem('tb_token'));
 
